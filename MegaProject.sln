@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegaProject.Data.Entities", "MegaProject.Data.Entities\MegaProject.Data.Entities.csproj", "{36121E6C-3907-4644-BD12-4C45F21B214E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegaProject.Data.Contracts", "MegaProject.Data.Contracts\MegaProject.Data.Contracts.csproj", "{FE3858A3-20AD-4EB0-AD31-34A99115B939}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegaProject.Data.EntityFramework", "MegaProject.Data.EntityFramework\MegaProject.Data.EntityFramework.csproj", "{2854FA14-352D-45FB-BB4F-D22DEBA204EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegaProject.Data.NHibernate", "MegaProject.Data.NHibernate\MegaProject.Data.NHibernate.csproj", "{8999D6FF-8C8A-4543-8F33-09FDAB6C741F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{880059A0-EB42-43DD-ABEF-0AECF8F1192E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegaProject.Data.Tests", "MegaProject.Data.Tests\MegaProject.Data.Tests.csproj", "{BBECB7BD-598D-4FDC-AA6B-2CA7E580145E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegaProject.Data.IntegrationTests", "MegaProject.Data.IntegrationTests\MegaProject.Data.IntegrationTests.csproj", "{2825DA73-F089-41A3-AAB1-83BF807430FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{36121E6C-3907-4644-BD12-4C45F21B214E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36121E6C-3907-4644-BD12-4C45F21B214E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36121E6C-3907-4644-BD12-4C45F21B214E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36121E6C-3907-4644-BD12-4C45F21B214E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE3858A3-20AD-4EB0-AD31-34A99115B939}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE3858A3-20AD-4EB0-AD31-34A99115B939}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE3858A3-20AD-4EB0-AD31-34A99115B939}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE3858A3-20AD-4EB0-AD31-34A99115B939}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2854FA14-352D-45FB-BB4F-D22DEBA204EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2854FA14-352D-45FB-BB4F-D22DEBA204EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2854FA14-352D-45FB-BB4F-D22DEBA204EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2854FA14-352D-45FB-BB4F-D22DEBA204EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8999D6FF-8C8A-4543-8F33-09FDAB6C741F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8999D6FF-8C8A-4543-8F33-09FDAB6C741F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8999D6FF-8C8A-4543-8F33-09FDAB6C741F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8999D6FF-8C8A-4543-8F33-09FDAB6C741F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBECB7BD-598D-4FDC-AA6B-2CA7E580145E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBECB7BD-598D-4FDC-AA6B-2CA7E580145E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBECB7BD-598D-4FDC-AA6B-2CA7E580145E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBECB7BD-598D-4FDC-AA6B-2CA7E580145E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2825DA73-F089-41A3-AAB1-83BF807430FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2825DA73-F089-41A3-AAB1-83BF807430FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2825DA73-F089-41A3-AAB1-83BF807430FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2825DA73-F089-41A3-AAB1-83BF807430FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BBECB7BD-598D-4FDC-AA6B-2CA7E580145E} = {880059A0-EB42-43DD-ABEF-0AECF8F1192E}
+		{2825DA73-F089-41A3-AAB1-83BF807430FE} = {880059A0-EB42-43DD-ABEF-0AECF8F1192E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+	EndGlobalSection
+EndGlobal
