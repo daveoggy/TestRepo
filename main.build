@@ -63,14 +63,10 @@
 	<!-- Helpers -->
 	
 	<target name="commitversion" desciption="Commit newly edited version file back to repository">
-		<exec program="${git.path}">
-			<arg value="add ${version.file}" />
-		</exec>
-		<exec program="${git.path}">
-			<arg value="commit -m 'Version update'" />
-		</exec>
-		<exec program="${git.path}">
-			<arg value="push origin master" />
+		<exec program="cmd.exe">
+			<arg value="promote.bat" />
+			<arg value="${git.path}" />
+			<arg value="${version.file}" />
 		</exec>
 	</target>
 	
