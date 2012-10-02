@@ -63,10 +63,13 @@
 	
 	<target name="setversion" description="Stamp the version info onto assemblyinfo.cs files">
 		<script language="C#">
-			  <imports>
-				<import namespace="System.Diagnostics" />
-				<import namespace="System.Text.RegularExpressions" />
-			  </imports>
+			<references>
+				<include name="System.dll" />
+		   </references>
+		  <imports>
+			<import namespace="System.Diagnostics" />
+			<import namespace="System.Text.RegularExpressions" />
+		  </imports>
 		   <code><![CDATA[
 		    public static string ConvertRevision(Project project)
 			{
