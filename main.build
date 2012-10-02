@@ -46,7 +46,7 @@
 	
 	<target name="increment.version" desciption="Increment project version and commit it to repository">
 		<call target="setversion" />
-		<exec program="promote.bat"/>
+		<!-- <exec program="promote.bat"/> -->
 	</target>
 
     <!-- Secondary Targets -->
