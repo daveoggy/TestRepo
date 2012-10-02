@@ -97,13 +97,15 @@
 			public static void ScriptMain(Project project)
 			{
 				string revision = ConvertRevision(project);
-				string build = project.Properties["project.build.number"];
+				string build = project.Properties["build.number"];
 				string versionRegex = @"(?<=\d+\.\d+\.)\d+\.\d+";
 				string newVersion = String.Format("{0}.{1}", build, revision);
 				 
 				StreamReader reader = new StreamReader(project.Properties["version.file"]);
 				string contents = reader.ReadToEnd();
 				reader.Close();
+				
+				project.Log(build);
 				
 				string newText = Regex.Replace(contents, versionRegex, newVersion);
 
