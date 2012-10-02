@@ -82,7 +82,7 @@
 							RedirectStandardOutput = true, UseShellExecute = false
 						}
 					};
-					
+					project.Log(Level.Info, Environment.CurrentDirectory);
 					p.Start();
 					var result = p.StandardOutput.ReadToEnd();
 					p.StandardOutput.Close();
