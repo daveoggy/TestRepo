@@ -2,6 +2,6 @@ set PATH=PATH;C:\Users\vitalii.biliienko\AppData\Local\GitHub\PortableGit_8810fd
 echo %USERDOMAIN%\%USERNAME%
 copy Version.cs D:\git\TestRepo >nul
 cd D:\git\TestRepo
-git.exe add Version.cs
-git.exe commit -m "Version update"
-git.exe push origin master
+call git.cmd add Version.cs
+call git.cmd commit -m "Version update"
+call git.cmd push origin master
