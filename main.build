@@ -44,9 +44,7 @@
         </nunit2>
     </target>
 	
-	<target name="increment.version" desciption="Increment project version and commit it to repository">
-		<call target="setversion" />
-		<call target="commitversion" />
+	<target name="increment.version" desciption="Increment project version and commit it to repository" depends="setversion, commitversion">
 	</target>
 
     <!-- Secondary Targets -->
