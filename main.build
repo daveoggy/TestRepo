@@ -96,29 +96,30 @@
 		   
 			public static void ScriptMain(Project project)
 			{
-				string revision = ConvertRevision(project);
-				string versionRegex = @"(?<=\d+\.\d+\.)\d+\.\w+";
-				string version = project.Properties["build.number"];
-				string build = Regex.Match(version, versionRegex).Value;
-				
-				//string newVersion = String.Format("{0}.{1}", build, revision);
-				string newVersion = build;
-				StreamReader reader = new StreamReader(project.Properties["version.file"]);
+				var buildNumber = project.Properties["build.number"];
+				var fileName = project.Properties["version.file"];
+				var match = Regex.Match(buildNumber, @"(?<main>\d+\.\d+)\.(?<build>\d+)\.(?<revision>\w+)");
+				var build = match.Groups["build"].Value;
+				var revision = match.Groups["revision"].Value;
+				var main = match.Groups["main"].Value;
+
+				var intVersion = String.Format("{0}.{1}.0", main, build);
+				var txtVersion = String.Format("{0}.{1}.{2}", main, build, revision);
+
+
+				var reader = new StreamReader(fileName);
 				string contents = reader.ReadToEnd();
 				reader.Close();
-				
-				project.Log(Level.Info, "Build version: " + build);
-				
-				string newText = Regex.Replace(contents, versionRegex, newVersion);
-
-				 project.Log(Level.Info, newVersion);
-				 project.Log(Level.Info, project.Properties["version.file"]);
-				 project.Log(Level.Info, contents);
-				 
-				 project.Log(Level.Info, newText);
-				 StreamWriter writer = new StreamWriter(project.Properties["version.file"], false);
-				 writer.Write(newText);
-				 writer.Close();
+				project.Log(Level.Info, "Old versions: ");
+				project.Log(Level.Info, contents);
+				contents = Regex.Replace(contents, @"AssemblyVersion\(.*\)", String.Format("AssemblyVersion(\"{0}\")", intVersion));
+				contents = Regex.Replace(contents, @"AssemblyFileVersion\(.*\)", String.Format("AssemblyFileVersion(\"{0}\")", intVersion));
+				contents = Regex.Replace(contents, @"AssemblyInformationalVersion\(.*\)", String.Format("AssemblyInformationalVersion(\"{0}\")", txtVersion));
+				project.Log(Level.Info, "New versions: ");
+				project.Log(Level.Info, contents);
+				var writer = new StreamWriter(fileName, false);
+				writer.Write(contents);
+				writer.Close();
 			}
 			]]>
 		   </code>
