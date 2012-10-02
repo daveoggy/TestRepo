@@ -77,15 +77,17 @@
 				
 				try {
 					var p = new Process {
-						EnableRaisingEvents = false,
 						StartInfo = new ProcessStartInfo(gitPath, "describe --long") {
 							RedirectStandardOutput = true, UseShellExecute = false
 						}
 					};
-					project.Log(Level.Info, Environment.CurrentDirectory);
+					
 					p.Start();
-					var result = p.StandardOutput.ReadToEnd();
-					p.StandardOutput.Close();
+					string q = "";
+					while(!p.HasExited)
+						q += p.StandardOutput.ReadToEnd();
+					var result = q;
+					//p.StandardOutput.Close();
 					var match = Regex.Match(result, @"-(?<rev>\d+)-");
 					var revisionsSinceTag = match.Groups["rev"].Value;
 					project.Log(Level.Info, String.Format("{0} to {1}", result, revisionsSinceTag));
