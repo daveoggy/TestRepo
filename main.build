@@ -28,7 +28,7 @@
         </delete>
     </target>
 
-    <target name="build" description="Build all application targets.">
+    <target name="build" description="Build all application targets." depends="clean">
         <mkdir dir="${bin-directory}" />
         <call target="build.megaproject" />
     </target>
@@ -46,6 +46,7 @@
 	
 	<target name="increment.version" desciption="Increment project version and commit it to repository">
 		<call target="setversion" />
+		<call target="commitversion" />
 	</target>
 
     <!-- Secondary Targets -->
@@ -60,6 +61,18 @@
     </target>
 	
 	<!-- Helpers -->
+	
+	<target name="commitversion" desciption="Commit newly edited version file back to repository">
+		<exec program="${git.path}">
+			<arg value="add ${version.file}" />
+		</exec>
+		<exec program="${git.path}">
+			<arg value="commit -m 'Version update'" />
+		</exec>
+		<exec program="${git.path}">
+			<arg value="push origin master" />
+		</exec>
+	</target>
 	
 	<target name="setversion" description="Stamp the version info onto assemblyinfo.cs files">
 		<script language="C#">
