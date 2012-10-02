@@ -97,7 +97,7 @@
 			public static void ScriptMain(Project project)
 			{
 				string revision = ConvertRevision(project);
-				string build = project.Properties["build.version"];
+				string build = project.Properties["project.build.number"];
 				string versionRegex = @"(?<=\d+\.\d+\.)\d+\.\d+";
 				string newVersion = String.Format("{0}.{1}", build, revision);
 				 
