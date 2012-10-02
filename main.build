@@ -105,7 +105,7 @@
 				string contents = reader.ReadToEnd();
 				reader.Close();
 				
-				project.Log(build);
+				project.Log(Level.Info, "Build version: " + build);
 				
 				string newText = Regex.Replace(contents, versionRegex, newVersion);
 
