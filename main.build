@@ -77,18 +77,14 @@
 				project.Log(Level.Info, "Git path: " + gitPath);
 				
 				try {
-					var p = new Process {
-						StartInfo = new ProcessStartInfo(gitPath, "describe --long") {
-							RedirectStandardOutput = true, UseShellExecute = false
-						}
-					};
-					
+					var p = new Process();
+					p.StartInfo.RedirectStandardOutput = true;
+					p.StartInfo.UseShellExecute = false;
+					p.StartInfo.FileName = gitPath;
+					p.StartInfo.Arguments = "describe --long";
 					p.Start();
-					string q = "";
-					while(!p.HasExited)
-						q += p.StandardOutput.ReadToEnd();
-					var result = q;
-					//p.StandardOutput.Close();
+					var result = p.StandardOutput.ReadToEnd();
+					p.WaitForExit();
 					var match = Regex.Match(result, @"-(?<rev>\d+)-");
 					var revisionsSinceTag = match.Groups["rev"].Value;
 					project.Log(Level.Info, String.Format("{0} to {1}", result, revisionsSinceTag));
