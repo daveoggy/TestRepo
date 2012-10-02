@@ -92,7 +92,7 @@
 					return revisionsSinceTag;
 				}
 				catch
-				{return 0;}
+				{return "0";}
 			}
 		   
 			public static void ScriptMain(Project project)
