@@ -74,6 +74,7 @@
 		    public static string ConvertRevision(Project project)
 			{
 				string gitPath = project.Properties["git.path"];
+				project.Log(Level.Info, "Git path: " + gitPath);
 				
 				try {
 					var p = new Process {
