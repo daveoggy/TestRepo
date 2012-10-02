@@ -1,0 +1,56 @@
+<project name="MegaProject" default="rebuild">
+
+    <!-- Configuration -->
+
+    <!-- Build as: release, debug, etc. -->
+    <property name="configuration" value="debug" />
+    <!-- Output directory where our executables should be written to -->
+    <property name="bin-directory" value="${directory::get-current-directory()}/bin/" />
+    <!-- Location of the MSBuild executable -->
+    <property name="msbuild" value="${framework::get-framework-directory(framework::get-target-framework())}\MSBuild.exe" />
+
+    <!-- Main Targets -->
+
+    <target name="clean" description="Delete all previously compiled binaries.">
+        <delete>
+            <fileset>
+                <include name="**/bin/**" />
+                <include name="**/obj/**" />
+                <include name="**/*.suo" />
+                <include name="**/*.user" />
+            </fileset>
+        </delete>
+    </target>
+
+    <target name="build" description="Build all application targets.">
+        <mkdir dir="${bin-directory}" />
+        <call target="build.megaproject" />
+    </target>
+
+    <target name="rebuild" depends="clean, build" />
+
+    <target name="test" description="Build test project and run all tests.">
+        <mkdir dir="${bin-directory}" />
+        <call target="build.tests" />
+        <nunit2>
+            <formatter type="Plain" />
+            <test assemblyname="${bin-directory}/MegaProject.Data.Tests.dll" />
+        </nunit2>
+    </target>
+	
+	<target name="increment.version" desciption="Increment project version and commit it to repository">
+	
+	</target>
+
+    <!-- Secondary Targets -->
+
+    <target name="build.megaproject">
+        <exec program="${msbuild}" commandline='"MegaProject.sln" /v:n /nologo /t:Build /p:Configuration=${configuration};OutDir="${bin-directory}"' />
+    </target>
+
+    <target name="build.tests">
+        <!-- Do not build verbosely (/v:q), user wants to see test results, not build output -->
+        <exec program="${msbuild}" commandline='"MegaProject.Data.Tests/MegaProject.Data.Tests.csproj" /v:q /nologo /t:Build /p:Configuration=Debug;OutDir="${bin-directory}"' />
+    </target>
+
+</project>
