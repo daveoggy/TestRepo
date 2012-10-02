@@ -97,10 +97,12 @@
 			public static void ScriptMain(Project project)
 			{
 				string revision = ConvertRevision(project);
-				string build = project.Properties["build.number"];
 				string versionRegex = @"(?<=\d+\.\d+\.)\d+\.\d+";
-				string newVersion = String.Format("{0}.{1}", build, revision);
-				 
+				string version = project.Properties["build.number"];
+				string build = Regex.Match(version, versionRegex).Value;
+				
+				//string newVersion = String.Format("{0}.{1}", build, revision);
+				string newVersion = build;
 				StreamReader reader = new StreamReader(project.Properties["version.file"]);
 				string contents = reader.ReadToEnd();
 				reader.Close();
