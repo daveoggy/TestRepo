@@ -4,10 +4,16 @@
 
     <!-- Build as: release, debug, etc. -->
     <property name="configuration" value="debug" />
+	<!-- Git path -->
+	<property name="git.path" value="C:\Users\vitalii.biliienko\AppData\Local\GitHub\PortableGit_8810fd5c2c79c73adcc73fd0825f3b32fdb816e7\bin\git.exe" />
     <!-- Output directory where our executables should be written to -->
     <property name="bin-directory" value="${directory::get-current-directory()}/bin/" />
     <!-- Location of the MSBuild executable -->
     <property name="msbuild" value="${framework::get-framework-directory(framework::get-target-framework())}\MSBuild.exe" />
+	<!-- Location of version file -->
+	<property name="version.file" value="${project::get-base-directory()}\Version.cs" />
+	<!-- Build number -->
+	<property name="build.number" value="0" overwrite="false"/>
 
     <!-- Main Targets -->
 
@@ -39,7 +45,7 @@
     </target>
 	
 	<target name="increment.version" desciption="Increment project version and commit it to repository">
-	
+		<call target="setversion" />
 	</target>
 
     <!-- Secondary Targets -->
@@ -52,5 +58,64 @@
         <!-- Do not build verbosely (/v:q), user wants to see test results, not build output -->
         <exec program="${msbuild}" commandline='"MegaProject.Data.Tests/MegaProject.Data.Tests.csproj" /v:q /nologo /t:Build /p:Configuration=Debug;OutDir="${bin-directory}"' />
     </target>
+	
+	<!-- Helpers -->
+	
+	<target name="setversion" description="Stamp the version info onto assemblyinfo.cs files">
+		<script language="C#">
+			  <imports>
+				<import namespace="System.Diagnostics" />
+				<import namespace="System.Text.RegularExpressions" />
+			  </imports>
+		   <code><![CDATA[
+		    public static string ConvertRevision(Project project)
+			{
+				string gitPath = project.Properties["git.path"];
+				
+				try {
+					var p = new Process {
+						EnableRaisingEvents = false,
+						StartInfo = new ProcessStartInfo(gitPath, "describe --long") {
+							RedirectStandardOutput = true, UseShellExecute = false
+						}
+					};
+					
+					p.Start();
+					var result = p.StandardOutput.ReadToEnd();
+					p.StandardOutput.Close();
+					var match = Regex.Match(result, @"-(?<rev>\d+)-");
+					var revisionsSinceTag = match.Groups["rev"].Value;
+					project.Log(Level.Info, String.Format("{0} to {1}", result, revisionsSinceTag)
+					return revisionsSinceTag;
+				}
+				catch
+				{return 0;}
+			}
+		   
+			public static void ScriptMain(Project project)
+			{
+				string revision = ConvertRevision(project);
+				string build = project.Properties["build.version"];
+				string versionRegex = @"(?<=\d+\.\d+\.)\d+\.\d+";
+				string newVersion = String.Format("{0}.{1}", build, revision);
+				 
+				StreamReader reader = new StreamReader(project.Properties["version.file"]);
+				string contents = reader.ReadToEnd();
+				reader.Close();
+				
+				string newText = Regex.Replace(contents, versionRegex, newVersion);
 
+				 project.Log(Level.Info, newVersion);
+				 project.Log(Level.Info, project.Properties["version.file"]);
+				 project.Log(Level.Info, contents);
+				 
+				 project.Log(Level.Info, newText);
+				 StreamWriter writer = new StreamWriter(project.Properties["version.file"], false);
+				 writer.Write(newText);
+				 writer.Close();
+			}
+			]]>
+		   </code>
+		</script>   
+ </target>
 </project>
