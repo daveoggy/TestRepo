@@ -44,7 +44,9 @@
         </nunit2>
     </target>
 	
-	<target name="increment.version" desciption="Increment project version and commit it to repository" depends="setversion, commitversion">
+	<target name="increment.version" desciption="Increment project version and commit it to repository">
+		<call target="setversion" />
+		<exec program="promote.bat"/>
 	</target>
 
     <!-- Secondary Targets -->
@@ -59,12 +61,6 @@
     </target>
 	
 	<!-- Helpers -->
-	
-	<target name="commitversion" desciption="Commit newly edited version file back to repository">
-		<exec program="cmd.exe">
-			<arg value="promote.bat" />
-		</exec>
-	</target>
 	
 	<target name="setversion" description="Stamp the version info onto assemblyinfo.cs files">
 		<script language="C#">
