@@ -51,7 +51,6 @@
     </Compile>
     <Compile Include="EntiyFrameworkTests.cs" />
     <Compile Include="NHibernateTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MegaProject.Data.Contracts\MegaProject.Data.Contracts.csproj">

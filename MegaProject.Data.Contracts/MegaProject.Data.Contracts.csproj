@@ -47,7 +47,6 @@
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IUnitOfWorkFactory.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MegaProject.Data.Entities\MegaProject.Data.Entities.csproj">

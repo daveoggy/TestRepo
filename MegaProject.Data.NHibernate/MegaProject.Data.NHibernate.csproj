@@ -69,7 +69,6 @@
     <Compile Include="Helpers\NHibernateHelper.cs" />
     <Compile Include="Helpers\DefaultNHibernateUnitOfWorkFactory.cs" />
     <Compile Include="NHibernateUnitOfWork.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MegaProject.Data.Contracts\MegaProject.Data.Contracts.csproj">

@@ -78,7 +78,6 @@
     <Compile Include="NHibernateTests\HelpersTests.cs" />
     <Compile Include="NHibernateTests\RepositoryTests.cs" />
     <Compile Include="NHibernateTests\UnitOfWorkTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
