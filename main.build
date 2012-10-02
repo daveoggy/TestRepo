@@ -88,7 +88,7 @@
 					p.StandardOutput.Close();
 					var match = Regex.Match(result, @"-(?<rev>\d+)-");
 					var revisionsSinceTag = match.Groups["rev"].Value;
-					project.Log(Level.Info, String.Format("{0} to {1}", result, revisionsSinceTag);
+					project.Log(Level.Info, String.Format("{0} to {1}", result, revisionsSinceTag));
 					return revisionsSinceTag;
 				}
 				catch
