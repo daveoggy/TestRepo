@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using MegaProject.Data.Contracts;
 
 namespace MegaProject.Data.EntityFramework
 {
     public class Repository : IRepositoryBase
     {
-        private MegaProjectContext _context;
+        private readonly MegaProjectContext _context;
         public Repository(MegaProjectContext context)
         {
             if(context == null)

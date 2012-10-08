@@ -9,6 +9,7 @@ namespace MegaProject.Data.EntityFramework
         public IDbSet<Customer> Customers { get; set; }
         public IDbSet<Order> Orders { get; set; }
         public IDbSet<OrderDetail> OrderDetails { get; set; }
+        public IDbSet<CustomerAudit> CustomersAudit { get; set; }
 
         public MegaProjectContext()
             : base("MegaProjectContext")
@@ -24,8 +25,7 @@ namespace MegaProject.Data.EntityFramework
             modelBuilder.Configurations.Add(new Configuration.CustomersConfiguration());
             modelBuilder.Configurations.Add(new Configuration.OrdersConfiguration());
             modelBuilder.Configurations.Add(new Configuration.OrderDetailsConfiguration());
-
-            
+            modelBuilder.Configurations.Add(new Configuration.CustomersAuditConfiguration());       
         }
 
 

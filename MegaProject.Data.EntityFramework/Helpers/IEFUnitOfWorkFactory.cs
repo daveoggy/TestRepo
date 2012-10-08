@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using MegaProject.Data.Contracts;
+﻿using System.Data;
 
 namespace MegaProject.Data.EntityFramework
 {

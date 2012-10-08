@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FluentNHibernate.Cfg;
-using FluentNHibernate.Cfg.Db;
+﻿using FluentNHibernate.Cfg;
 using MegaProject.Data.Entities;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
@@ -14,14 +9,9 @@ namespace MegaProject.Data.NHibernate.Helpers
     {
         public void Initialize()
         {
-            IPersistenceConfigurer cfg = OracleClientConfiguration
-                .Oracle10
-                .ConnectionString(
-                    "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=127.0.0.1)(PORT=1521))(CONNECT_DATA=(SERVER=dedicated)(SERVICE_NAME=XE)));User ID=mproject;Password=vjqgfhjkm;")
-                .ShowSql();
+            var cfg = new global::NHibernate.Cfg.Configuration().Configure();
             
-            var factory = Fluently.Configure(new global::NHibernate.Cfg.Configuration().Configure())
-                            .Database(cfg)
+            var factory = Fluently.Configure(cfg)
                             .Mappings(m => m.FluentMappings.AddFromAssemblyOf<NHibernateHelper>())
                             .ExposeConfiguration(BuildSchema)
                             .BuildSessionFactory();

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using MegaProject.Data.Entities;
 using MegaProject.Data.NHibernate.Helpers;
 using NUnit.Framework;

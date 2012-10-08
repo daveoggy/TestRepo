@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using MegaProject.Data.Entities;
 using MegaProject.Data.NHibernate;
 using MegaProject.Data.NHibernate.Helpers;
 using Moq;
 using NHibernate;
 using NHibernate.Linq;
-using NHibernate.Engine;
 using NUnit.Framework;
 
 namespace MegaProject.Data.Tests.NHibernateTests

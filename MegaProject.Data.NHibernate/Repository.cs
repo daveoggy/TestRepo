@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using MegaProject.Data.Contracts;
 using MegaProject.Data.NHibernate.Helpers;
 using NHibernate;
-using NHibernate.Context;
 using NHibernate.Linq;
 
 namespace MegaProject.Data.NHibernate

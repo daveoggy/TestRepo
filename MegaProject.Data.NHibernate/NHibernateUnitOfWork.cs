@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Data;
-using MegaProject.Data.Contracts;
 using NHibernate;
-using NHibernate.Context;
 
 namespace MegaProject.Data.NHibernate
 {

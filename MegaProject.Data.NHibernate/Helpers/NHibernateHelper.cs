@@ -1,6 +1,5 @@
 ﻿using FluentNHibernate.Cfg;
 using NHibernate;
-using NHibernate.Context;
 
 namespace MegaProject.Data.NHibernate.Helpers
 {

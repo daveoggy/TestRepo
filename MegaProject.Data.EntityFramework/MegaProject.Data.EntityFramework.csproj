@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MegaProject.Data.EntityFramework</RootNamespace>
     <AssemblyName>MegaProject.Data.EntityFramework</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -33,9 +33,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -48,16 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Version.cs">
-      <Link>Version.cs</Link>
-    </Compile>
+    <Compile Include="Configuration\CustomersAuditConfiguration.cs" />
     <Compile Include="Configuration\CustomersConfiguration.cs" />
     <Compile Include="Configuration\OrderDetailsConfiguration.cs" />
     <Compile Include="Configuration\OrdersConfiguration.cs" />
     <Compile Include="Configuration\SeedingDatabaseInitializer.cs" />
     <Compile Include="Helpers\MegaEntityFrameworkUnitOfWorkFactory.cs" />
-    <Compile Include="EntityFrameworkRepository.cs" />
-    <Compile Include="Helpers\DefaultEntityFrameworkUnitOfWorkFactory.cs" />
     <Compile Include="Helpers\IRepositoryFactory.cs" />
     <Compile Include="Helpers\RepositoryFactory.cs" />
     <Compile Include="Helpers\IEFUnitOfWork.cs" />
@@ -70,6 +66,11 @@
       <DependentUpon>201209190708321_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Copy of 201209190708321_Initial.cs" />
+    <Compile Include="Migrations\Copy of 201209190708321_Initial.Designer.cs">
+      <DependentUpon>Copy of 201209190708321_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -83,11 +84,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201209190708321_Initial.resx">
       <DependentUpon>201209190708321_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\Copy of 201209190708321_Initial.resx">
+      <DependentUpon>Copy of 201209190708321_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -21,7 +21,6 @@ namespace MegaProject.Data.NHibernate.Configuration
             Map(x => x.Phone).Column("PHONE");
             Map(x => x.Fax).Column("FAX");
             Map(x => x.Bool).Column("BOOL");
-
             HasMany(x => x.Orders).KeyColumn("CUSTOMERID")
                 .Inverse()
                 .Cascade.All();

@@ -1,5 +1,4 @@
 ﻿using System;
-using MegaProject.Data.Contracts;
 
 namespace MegaProject.Data.EntityFramework
 {

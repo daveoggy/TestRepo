@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MegaProject.Data.NHibernate.Helpers;
+﻿using MegaProject.Data.NHibernate.Helpers;
 using NUnit.Framework;
 
 namespace MegaProject.Data.Tests.NHibernateTests
@@ -12,7 +8,6 @@ namespace MegaProject.Data.Tests.NHibernateTests
     public class HelpersTests
     {
         [Test]
-        [Ignore]
         public void NHibernateHelper_Should_Maintain_Only_One_SessionFactory()
         {
             var factory1 = NHibernateHelper.Factory;
@@ -21,7 +16,6 @@ namespace MegaProject.Data.Tests.NHibernateTests
         }
 
         [Test]
-        [Ignore]
         public void RepositoryFactory_Should_Return_New_Repository_Every_Time()
         {
             var factory = new RepositoryFactory();
@@ -34,7 +28,6 @@ namespace MegaProject.Data.Tests.NHibernateTests
 
         
         [Test]
-        [Ignore]
         public void MegaNHibernateUnitOfWorkFactory_Should_Create_New_Instances_Of_Unit_Of_Work()
         {
             var factory = new MegaNHibernateUnitOfWorkFactory();

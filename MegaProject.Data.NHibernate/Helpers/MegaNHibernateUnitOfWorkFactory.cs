@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using MegaProject.Data.Contracts;
 
 namespace MegaProject.Data.NHibernate.Helpers
 {
