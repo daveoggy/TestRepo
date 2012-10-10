@@ -23,19 +23,20 @@ namespace MegaProject.Workflow.Activities
 
             logger.InfoFormat("Trying to mark the change to {0} at {1} as synced.", change.Email, change.Added);
 
-            change.IsSynced = true;
-
             try
             {
-                using (var scope = new System.Transactions.TransactionScope())
-                {
+                change.IsSynced = true;
+//                using (var scope = new System.Transactions.TransactionScope())
+//                {
                     using (var repoOracle = container.Resolve<NH.IRepositoryFactory>().Create())
                     using (var repoSql = container.Resolve<EF.IRepositoryFactory>().Create())
                     {
                         switch (change.Source)
                         {
                             case ChangeSource.MSSQL:
-                                repoSql.Update(change);
+                                var changeActual = repoSql.All<CustomerAudit>().Single(ca => ca.Id == change.Id);
+                                changeActual.IsSynced = true;
+                                repoSql.Update(changeActual);
                                 var extraOracle = repoOracle.All<CustomerAudit>().Single(ca =>
                                                                                    (ca.Email == change.Email) &&
                                                                                    (ca.Added > change.Added));
@@ -43,7 +44,9 @@ namespace MegaProject.Workflow.Activities
                                 repoOracle.Update(extraOracle);
                                 break;
                             case ChangeSource.Oracle:
-                                repoOracle.Update(change);
+                                var changeActual2 = repoOracle.All<CustomerAudit>().Single(ca => ca.Id == change.Id);
+                                changeActual2.IsSynced = true;
+                                repoOracle.Update(changeActual2);
                                 var extraSql = repoSql.All<CustomerAudit>().Single(ca =>
                                                                                    (ca.Email == change.Email) &&
                                                                                    (ca.Added > change.Added));
@@ -54,12 +57,13 @@ namespace MegaProject.Workflow.Activities
                         repoOracle.Save();
                         repoSql.Save();
                     }
-                    scope.Complete();
-                }
+//                    scope.Complete();
+//                }
             }
             catch (Exception ex)
             {
                 logger.Error("Error while trying to mark the change as synced.", ex);
+                //change.IsSynced = false;
                 throw;
             }
         }

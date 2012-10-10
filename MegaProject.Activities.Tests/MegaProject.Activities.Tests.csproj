@@ -61,9 +61,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GetChangesTests.cs" />
+    <Compile Include="IgnoreChangeTests.cs" />
     <Compile Include="LogMessageTests.cs" />
+    <Compile Include="MarkSyncedTests.cs" />
     <Compile Include="MergeChangesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SyncChangeTests.cs" />
+    <Compile Include="SyncCompleteTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MegaProject.Data.Contracts\MegaProject.Data.Contracts.csproj">

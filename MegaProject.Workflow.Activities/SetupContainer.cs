@@ -10,8 +10,6 @@ namespace MegaProject.Workflow.Activities
 
     public sealed class SetupContainer : CodeActivity<IUnityContainer>
     {
-        // If your activity returns a value, derive from CodeActivity<TResult>
-        // and return the value from the Execute method.
         protected override IUnityContainer Execute(CodeActivityContext context)
         {
             log4net.Config.XmlConfigurator.Configure();
@@ -23,6 +21,8 @@ namespace MegaProject.Workflow.Activities
                 .RegisterType<NH.IRepositoryFactory, NH.RepositoryFactory>();
 
             var logger = container.Resolve<ILog>();
+            logger.Info("-----------------------------------------------");
+            logger.Info("Workflow started");
             logger.Info("Configured Unity container");
 
             return container;

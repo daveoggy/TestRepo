@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using MegaProject.Data.Contracts;
 using MegaProject.Data.NHibernate.Helpers;
 using NHibernate;
+using NHibernate.Context;
 using NHibernate.Linq;
 
 namespace MegaProject.Data.NHibernate
@@ -39,6 +40,7 @@ namespace MegaProject.Data.NHibernate
                 session = NHibernateHelper.Factory.OpenSession();
                 //CurrentSessionContext.Bind(session);
                 _session = session;
+                
                 _transaction = session.BeginTransaction();
                 _shouldDispose = true;
             }

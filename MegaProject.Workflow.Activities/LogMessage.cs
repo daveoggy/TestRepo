@@ -7,13 +7,10 @@ namespace MegaProject.Workflow.Activities
 
     public sealed class LogMessage : CodeActivity
     {
-        // Define an activity input argument of type string
         public InArgument<string> Message { get; set; }
         public InArgument<string> Level { get; set; }
         public InArgument<IUnityContainer> Container { get; set; }
 
-        // If your activity returns a value, derive from CodeActivity<TResult>
-        // and return the value from the Execute method.
         protected override void Execute(CodeActivityContext context)
         {
             var text = context.GetValue(this.Message);

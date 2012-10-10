@@ -1,10 +1,10 @@
 ﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="MegaProject.Workflow.Activities.Main" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap2010:WorkflowViewState.IdRef="MegaProject.Workflow.Activities.Main_1"
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:local="clr-namespace:MegaProject.Workflow.Activities"
  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
  xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
  xmlns:mde="clr-namespace:MegaProject.Data.Entities;assembly=MegaProject.Data.Entities"
  xmlns:mpu="clr-namespace:Microsoft.Practices.Unity;assembly=Microsoft.Practices.Unity"
- xmlns:mwa="clr-namespace:MegaProject.Workflow.Activities;assembly=MegaProject.Workflow.Activities"
  xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
  xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
  xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
@@ -25,9 +25,7 @@
     <sco:Collection x:TypeArguments="AssemblyReference">
       <AssemblyReference>log4net</AssemblyReference>
       <AssemblyReference>Microsoft.CSharp</AssemblyReference>
-      <AssemblyReference>Microsoft.Practices.ServiceLocation</AssemblyReference>
       <AssemblyReference>Microsoft.Practices.Unity</AssemblyReference>
-      <AssemblyReference>Microsoft.Practices.Unity.Configuration</AssemblyReference>
       <AssemblyReference>System</AssemblyReference>
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>System.Core</AssemblyReference>
@@ -35,6 +33,7 @@
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
       <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Transactions</AssemblyReference>
       <AssemblyReference>System.Xaml</AssemblyReference>
       <AssemblyReference>System.Xml</AssemblyReference>
       <AssemblyReference>System.Xml.Linq</AssemblyReference>
@@ -44,6 +43,7 @@
       <AssemblyReference>MegaProject.Data.NHibernate</AssemblyReference>
       <AssemblyReference>MegaProject.Utilities</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>MegaProject.Workflow.Activities</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="Core sequence" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -53,47 +53,47 @@
       <Variable x:TypeArguments="scg:IList(mde:CustomerAudit)" Name="MSSQLChanges" />
       <Variable x:TypeArguments="scg:IList(mde:CustomerAudit)" Name="CustomersToUpdate" />
     </Sequence.Variables>
-    <mwa:SetupContainer DisplayName="Setup Container" sap2010:WorkflowViewState.IdRef="SetupContainer_1">
-      <mwa:SetupContainer.Result>
+    <local:SetupContainer DisplayName="Setup Container" sap2010:WorkflowViewState.IdRef="SetupContainer_1">
+      <local:SetupContainer.Result>
         <OutArgument x:TypeArguments="mpu:IUnityContainer">
           <mca:CSharpReference x:TypeArguments="mpu:IUnityContainer">Container</mca:CSharpReference>
         </OutArgument>
-      </mwa:SetupContainer.Result>
-    </mwa:SetupContainer>
-    <mwa:GetChanges DisplayName="Get Changes from MSSQL" sap2010:WorkflowViewState.IdRef="GetChanges_1">
-      <mwa:GetChanges.Container>
+      </local:SetupContainer.Result>
+    </local:SetupContainer>
+    <local:GetChanges DisplayName="Get Changes from MSSQL" sap2010:WorkflowViewState.IdRef="GetChanges_1">
+      <local:GetChanges.Container>
         <InArgument x:TypeArguments="mpu:IUnityContainer">
           <mca:CSharpValue x:TypeArguments="mpu:IUnityContainer">Container</mca:CSharpValue>
         </InArgument>
-      </mwa:GetChanges.Container>
-      <mwa:GetChanges.Result>
+      </local:GetChanges.Container>
+      <local:GetChanges.Result>
         <OutArgument x:TypeArguments="scg:IList(mde:CustomerAudit)">
           <mca:CSharpReference x:TypeArguments="scg:IList(mde:CustomerAudit)">MSSQLChanges</mca:CSharpReference>
         </OutArgument>
-      </mwa:GetChanges.Result>
-      <mwa:GetChanges.Source>
+      </local:GetChanges.Result>
+      <local:GetChanges.Source>
         <InArgument x:TypeArguments="mde:ChangeSource">
           <mca:CSharpValue x:TypeArguments="mde:ChangeSource">MegaProject.Data.Entities.ChangeSource.MSSQL</mca:CSharpValue>
         </InArgument>
-      </mwa:GetChanges.Source>
-    </mwa:GetChanges>
-    <mwa:GetChanges DisplayName="Get Changes from Oracle" sap2010:WorkflowViewState.IdRef="GetChanges_2">
-      <mwa:GetChanges.Container>
+      </local:GetChanges.Source>
+    </local:GetChanges>
+    <local:GetChanges DisplayName="Get Changes from Oracle" sap2010:WorkflowViewState.IdRef="GetChanges_2">
+      <local:GetChanges.Container>
         <InArgument x:TypeArguments="mpu:IUnityContainer">
           <mca:CSharpValue x:TypeArguments="mpu:IUnityContainer">Container</mca:CSharpValue>
         </InArgument>
-      </mwa:GetChanges.Container>
-      <mwa:GetChanges.Result>
+      </local:GetChanges.Container>
+      <local:GetChanges.Result>
         <OutArgument x:TypeArguments="scg:IList(mde:CustomerAudit)">
           <mca:CSharpReference x:TypeArguments="scg:IList(mde:CustomerAudit)">OracleChanges</mca:CSharpReference>
         </OutArgument>
-      </mwa:GetChanges.Result>
-      <mwa:GetChanges.Source>
+      </local:GetChanges.Result>
+      <local:GetChanges.Source>
         <InArgument x:TypeArguments="mde:ChangeSource">
           <mca:CSharpValue x:TypeArguments="mde:ChangeSource">MegaProject.Data.Entities.ChangeSource.Oracle</mca:CSharpValue>
         </InArgument>
-      </mwa:GetChanges.Source>
-    </mwa:GetChanges>
+      </local:GetChanges.Source>
+    </local:GetChanges>
     <If DisplayName="Are there any changes?" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Condition>
         <InArgument x:TypeArguments="x:Boolean">
@@ -102,28 +102,69 @@
       </If.Condition>
       <If.Then>
         <Sequence sap2010:WorkflowViewState.IdRef="Sequence_2">
-          <mwa:MergeChanges DisplayName="Merge Changes" sap2010:WorkflowViewState.IdRef="MergeChanges_1">
-            <mwa:MergeChanges.Container>
+          <Sequence.Variables>
+            <Variable x:TypeArguments="scg:IList(mde:CustomerAudit)" Name="Ignored" />
+          </Sequence.Variables>
+          <local:MergeChanges sap2010:WorkflowViewState.IdRef="MergeChanges_2">
+            <local:MergeChanges.Container>
               <InArgument x:TypeArguments="mpu:IUnityContainer">
                 <mca:CSharpValue x:TypeArguments="mpu:IUnityContainer">Container</mca:CSharpValue>
               </InArgument>
-            </mwa:MergeChanges.Container>
-            <mwa:MergeChanges.MSSQLChanges>
+            </local:MergeChanges.Container>
+            <local:MergeChanges.Ignored>
+              <OutArgument x:TypeArguments="scg:IList(mde:CustomerAudit)">
+                <mca:CSharpReference x:TypeArguments="scg:IList(mde:CustomerAudit)">Ignored</mca:CSharpReference>
+              </OutArgument>
+            </local:MergeChanges.Ignored>
+            <local:MergeChanges.MSSQLChanges>
               <InArgument x:TypeArguments="scg:IList(mde:CustomerAudit)">
                 <mca:CSharpValue x:TypeArguments="scg:IList(mde:CustomerAudit)">MSSQLChanges</mca:CSharpValue>
               </InArgument>
-            </mwa:MergeChanges.MSSQLChanges>
-            <mwa:MergeChanges.OracleChanges>
+            </local:MergeChanges.MSSQLChanges>
+            <local:MergeChanges.OracleChanges>
               <InArgument x:TypeArguments="scg:IList(mde:CustomerAudit)">
                 <mca:CSharpValue x:TypeArguments="scg:IList(mde:CustomerAudit)">OracleChanges</mca:CSharpValue>
               </InArgument>
-            </mwa:MergeChanges.OracleChanges>
-            <mwa:MergeChanges.Result>
+            </local:MergeChanges.OracleChanges>
+            <local:MergeChanges.ToSync>
               <OutArgument x:TypeArguments="scg:IList(mde:CustomerAudit)">
                 <mca:CSharpReference x:TypeArguments="scg:IList(mde:CustomerAudit)">CustomersToUpdate</mca:CSharpReference>
               </OutArgument>
-            </mwa:MergeChanges.Result>
-          </mwa:MergeChanges>
+            </local:MergeChanges.ToSync>
+          </local:MergeChanges>
+          <If DisplayName="Are there any ignored changes?" sap2010:WorkflowViewState.IdRef="If_2">
+            <If.Condition>
+              <InArgument x:TypeArguments="x:Boolean">
+                <mca:CSharpValue x:TypeArguments="x:Boolean">Ignored.Count &gt; 0</mca:CSharpValue>
+              </InArgument>
+            </If.Condition>
+            <If.Then>
+              <ForEach x:TypeArguments="mde:CustomerAudit" DisplayName="Loop through ignored changes" sap2010:WorkflowViewState.IdRef="ForEach`1_3">
+                <ForEach.Values>
+                  <InArgument x:TypeArguments="scg:IEnumerable(mde:CustomerAudit)">
+                    <mca:CSharpValue x:TypeArguments="scg:IEnumerable(mde:CustomerAudit)">Ignored</mca:CSharpValue>
+                  </InArgument>
+                </ForEach.Values>
+                <ActivityAction x:TypeArguments="mde:CustomerAudit">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="mde:CustomerAudit" Name="ignored" />
+                  </ActivityAction.Argument>
+                  <local:IgnoreChange DisplayName="Ignore Change" sap2010:WorkflowViewState.IdRef="IgnoreChange_1">
+                    <local:IgnoreChange.Container>
+                      <InArgument x:TypeArguments="mpu:IUnityContainer">
+                        <mca:CSharpValue x:TypeArguments="mpu:IUnityContainer">Container</mca:CSharpValue>
+                      </InArgument>
+                    </local:IgnoreChange.Container>
+                    <local:IgnoreChange.Ignored>
+                      <InArgument x:TypeArguments="mde:CustomerAudit">
+                        <mca:CSharpValue x:TypeArguments="mde:CustomerAudit">ignored</mca:CSharpValue>
+                      </InArgument>
+                    </local:IgnoreChange.Ignored>
+                  </local:IgnoreChange>
+                </ActivityAction>
+              </ForEach>
+            </If.Then>
+          </If>
           <ForEach x:TypeArguments="mde:CustomerAudit" DisplayName="Loop through changes" sap2010:WorkflowViewState.IdRef="ForEach`1_1">
             <ForEach.Values>
               <InArgument x:TypeArguments="scg:IEnumerable(mde:CustomerAudit)">
@@ -134,51 +175,53 @@
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="mde:CustomerAudit" Name="change" />
               </ActivityAction.Argument>
-              <mwa:SyncStateMachine DisplayName="Synchronize Customer" sap2010:WorkflowViewState.IdRef="SyncStateMachine_1">
-                <mwa:SyncStateMachine.Change>
+              <local:SyncStateMachine DisplayName="Synchronize Customer" sap2010:WorkflowViewState.IdRef="SyncStateMachine_1">
+                <local:SyncStateMachine.Change>
                   <InArgument x:TypeArguments="mde:CustomerAudit">
                     <mca:CSharpValue x:TypeArguments="mde:CustomerAudit">change</mca:CSharpValue>
                   </InArgument>
-                </mwa:SyncStateMachine.Change>
-                <mwa:SyncStateMachine.Container>
+                </local:SyncStateMachine.Change>
+                <local:SyncStateMachine.Container>
                   <InArgument x:TypeArguments="mpu:IUnityContainer">
                     <mca:CSharpValue x:TypeArguments="mpu:IUnityContainer">Container</mca:CSharpValue>
                   </InArgument>
-                </mwa:SyncStateMachine.Container>
-              </mwa:SyncStateMachine>
+                </local:SyncStateMachine.Container>
+              </local:SyncStateMachine>
             </ActivityAction>
           </ForEach>
         </Sequence>
       </If.Then>
       <If.Else>
-        <mwa:LogMessage DisplayName="Log Message" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Warn" Message="No changes to sync. Exiting.">
-          <mwa:LogMessage.Container>
+        <local:LogMessage DisplayName="Log Message" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Warn" Message="No changes to sync. Exiting.">
+          <local:LogMessage.Container>
             <InArgument x:TypeArguments="mpu:IUnityContainer">
               <mca:CSharpValue x:TypeArguments="mpu:IUnityContainer">Container</mca:CSharpValue>
             </InArgument>
-          </mwa:LogMessage.Container>
-        </mwa:LogMessage>
+          </local:LogMessage.Container>
+        </local:LogMessage>
       </If.Else>
     </If>
-    <mwa:LogMessage Level="Info" Message="Workflow completed.">
-      <mwa:LogMessage.Container>
+    <local:LogMessage DisplayName="Finish" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="Workflow completed.">
+      <local:LogMessage.Container>
         <InArgument x:TypeArguments="mpu:IUnityContainer">
           <mca:CSharpValue x:TypeArguments="mpu:IUnityContainer">Container</mca:CSharpValue>
         </InArgument>
-      </mwa:LogMessage.Container>
-      <sap2010:WorkflowViewState.IdRef>LogMessage_2</sap2010:WorkflowViewState.IdRef>
-    </mwa:LogMessage>
-    <sads:DebugSymbol.Symbol>d2VkOlx1c2Vyc1x2aXRhbGlpLmJpbGlpZW5rb1xkb2N1bWVudHNcdmlzdWFsIHN0dWRpbyAyMDEyXFByb2plY3RzXE1lZ2FQcm9qZWN0XFdvcmtmbG93VGVzdGVyXE1haW4ueGFtbCAzA64BDgIBAToFQBoCAWFBBVEWAgFRUgViFgIBQWMFpAEKAgEKpQEFrAEWAgECPQs9ZQIBYkQLRF0CAVxJC0lxAgFXTgtOfQIBUlULVV0CAUxaC1pyAgFHXwtffgIBQmYLZn0CAQtqCZkBFAIBGJwBCaIBGgIBEKgBC6gBXQIBBaUBKqUBPwIBBKUBG6UBIQIBA2sLgAEeAgEsgQELmAEVAgEZnwEPnwFhAgETnAF3nAGVAQIBEpwBaJwBbgIBEW4RbmMCATx4EXhwAgE3fRF9fAIBMnMRc28CAS2EARGEAXoCASeLAQ+WASYCARqOARWOAWICASGTARWTAWcCARs=</sads:DebugSymbol.Symbol>
+      </local:LogMessage.Container>
+    </local:LogMessage>
+    <sads:DebugSymbol.Symbol>d3ZkOlx1c2Vyc1x2aXRhbGlpLmJpbGlpZW5rb1xkb2N1bWVudHNcdmlzdWFsIHN0dWRpbyAyMDEyXFByb2plY3RzXE1lZ2FQcm9qZWN0XE1lZ2FQcm9qZWN0LldvcmtmbG93LkFjdGl2aXRpZXNcTWFpbi54YW1sKDED1AEOAgEBOAU+HAMBiwE/BU8YAgF7UAVgGAIBa2EFywEKAgEKzAEF0gEYAgECOws7ZQMBjAFCC0JdAwGGAUcLR3EDAYEBTAtMfQIBfFMLU10CAXZYC1hyAgFxXQtdfgIBbGQLZH0CAQtoCcABFAIBGMMBCckBHAIBEM8BC88BXQIBBcwBcMwBhQECAQTMAWHMAWcCAQNsC4YBIAIBTIcBC6cBEAIBL6gBC78BFQIBGcYBD8YBYQIBE8MBecMBlwECARLDAWrDAXACARFvEW9jAgFlfhF+cAIBX3kReW8CAVmDARGDAXwCAVN0EXRyAgFNigERigFkAgEwjgEPpQEZAgE2qwERqwF6AgEpsgEPvQEoAgEakQEVkQF0AgFGmAETowEoAgE3tQEVtQFiAgEiugEVugFnAgEbmwEZmwFrAgE/oAEZoAFnAgE4</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="SetupContainer_1" sap:VirtualizedContainerService.HintSize="534,22" />
-      <sap2010:ViewStateData Id="GetChanges_1" sap:VirtualizedContainerService.HintSize="534,22" />
-      <sap2010:ViewStateData Id="GetChanges_2" sap:VirtualizedContainerService.HintSize="534,22" />
-      <sap2010:ViewStateData Id="MergeChanges_1" sap:VirtualizedContainerService.HintSize="287,22" />
+      <sap2010:ViewStateData Id="SetupContainer_1" sap:VirtualizedContainerService.HintSize="711,22" />
+      <sap2010:ViewStateData Id="GetChanges_1" sap:VirtualizedContainerService.HintSize="711,22" />
+      <sap2010:ViewStateData Id="GetChanges_2" sap:VirtualizedContainerService.HintSize="711,22" />
+      <sap2010:ViewStateData Id="MergeChanges_2" sap:VirtualizedContainerService.HintSize="464,22" />
+      <sap2010:ViewStateData Id="IgnoreChange_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="ForEach`1_3" sap:VirtualizedContainerService.HintSize="287,210" />
+      <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="464,360" />
       <sap2010:ViewStateData Id="SyncStateMachine_1" sap:VirtualizedContainerService.HintSize="200,22" />
-      <sap2010:ViewStateData Id="ForEach`1_1" sap:VirtualizedContainerService.HintSize="287,210" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="309,396">
+      <sap2010:ViewStateData Id="ForEach`1_1" sap:VirtualizedContainerService.HintSize="464,210" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="486,796">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -186,16 +229,16 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="200,22" />
-      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="534,546" />
-      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="534,22" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="556,918">
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="711,946" />
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="711,22" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="733,1318">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="MegaProject.Workflow.Activities.Main_1" sap:VirtualizedContainerService.HintSize="596,998" />
+      <sap2010:ViewStateData Id="MegaProject.Workflow.Activities.Main_1" sap:VirtualizedContainerService.HintSize="773,1398" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

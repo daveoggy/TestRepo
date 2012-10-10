@@ -106,9 +106,10 @@ namespace MegaProject.Activities.Tests
                 };
 
                 var outputs = WorkflowInvoker.Invoke(new MergeChanges(), inputs);
+                var result = outputs["ToSync"] as List<CustomerAudit>;
                 var expected = new List<CustomerAudit> { ca1, ca23, ca4, ca32, ca5 };
 
-                CollectionAssert.AreEqual(expected, outputs);
+                CollectionAssert.AreEqual(expected, result);
             }
 
             [Test]
@@ -150,8 +151,9 @@ namespace MegaProject.Activities.Tests
                 };
 
                 var outputs = WorkflowInvoker.Invoke(new MergeChanges(), inputs);
+                var result = outputs["ToSync"] as List<CustomerAudit>;
                 var expected = new List<CustomerAudit> { ca3, ca1, ca2};
-                CollectionAssert.AreEqual(expected, outputs);
+                CollectionAssert.AreEqual(expected, result);
             }
 
             [Test]
@@ -184,8 +186,9 @@ namespace MegaProject.Activities.Tests
                 };
 
                 var outputs = WorkflowInvoker.Invoke(new MergeChanges(), inputs);
-                Assert.AreSame(ca1, outputs[0]);
-                Assert.AreSame(ca2, outputs[1]);
+                var result = outputs["ToSync"] as List<CustomerAudit>;
+                var expected = new List<CustomerAudit> { ca1, ca2 };
+                CollectionAssert.AreEqual(expected, result);
             }
         }
     }

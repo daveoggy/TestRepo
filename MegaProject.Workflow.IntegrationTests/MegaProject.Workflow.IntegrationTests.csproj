@@ -1,16 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{98EC024C-6439-44B1-8B1E-29E457B2201F}</ProjectGuid>
-    <ProjectTypeGuids>{32f31d43-81cc-4c15-9de6-3fc5453562b6};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{437CD3B1-36F2-4213-A323-8A7BFC52C830}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MegaProject.Workflow.Activities</RootNamespace>
-    <AssemblyName>MegaProject.Workflow.Activities</AssemblyName>
+    <RootNamespace>MegaProject.Workflow.IntegrationTests</RootNamespace>
+    <AssemblyName>MegaProject.Workflow.IntegrationTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -22,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,37 +31,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net">
-      <HintPath>..\packages\log4net.2.0.0\lib\net40-client\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Practices.Unity">
-      <HintPath>..\MegaProject.Utilities\bin\Debug\Microsoft.Practices.Unity.dll</HintPath>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Activities" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.ServiceModel.Activities" />
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GetChanges.cs" />
-    <Compile Include="IgnoreChange.cs" />
-    <Compile Include="LogMessage.cs" />
-    <Compile Include="MarkSynced.cs" />
-    <Compile Include="MergeChanges.cs" />
+    <Compile Include="MainWorkflowTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SetupContainer.cs" />
-    <Compile Include="SyncChange.cs" />
-    <Compile Include="SyncComplete.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -75,29 +61,17 @@
       <Name>MegaProject.Data.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\MegaProject.Data.EntityFramework\MegaProject.Data.EntityFramework.csproj">
-      <Project>{2854FA14-352D-45FB-BB4F-D22DEBA204EC}</Project>
+      <Project>{2854fa14-352d-45fb-bb4f-d22deba204ec}</Project>
       <Name>MegaProject.Data.EntityFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\MegaProject.Data.NHibernate\MegaProject.Data.NHibernate.csproj">
       <Project>{8999d6ff-8c8a-4543-8f33-09fdab6c741f}</Project>
       <Name>MegaProject.Data.NHibernate</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MegaProject.Utilities\MegaProject.Utilities2.csproj">
-      <Project>{E7BBBF82-E760-4F46-A583-8FEE2B51AE49}</Project>
-      <Name>MegaProject.Utilities2</Name>
+    <ProjectReference Include="..\MegaProject.Workflow.Activities\MegaProject.Workflow.Activities.csproj">
+      <Project>{98ec024c-6439-44b1-8b1e-29e457b2201f}</Project>
+      <Name>MegaProject.Workflow.Activities</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <XamlAppDef Include="SyncStateMachine.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </XamlAppDef>
-  </ItemGroup>
-  <ItemGroup>
-    <XamlAppDef Include="Main.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </XamlAppDef>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
